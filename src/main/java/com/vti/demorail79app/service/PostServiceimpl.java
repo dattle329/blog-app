@@ -7,6 +7,8 @@ import com.vti.demorail79app.repository.PostRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class PostServiceimpl implements PostService{
