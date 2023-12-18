@@ -3,9 +3,18 @@ package com.vti.demorail79app.mapper;
 import com.vti.demorail79app.dto.PostDto;
 import com.vti.demorail79app.entity.Post;
 import com.vti.demorail79app.form.PostCreateForm;
+import com.vti.demorail79app.form.PostUpdateForm;
 
 public class PostMapper {
     public static Post map(PostCreateForm form){
+        var post = new Post();
+        post.setTitle(form.getTitle());
+        post.setContent(form.getContent());
+        post.setDescription(form.getDescription());
+        return post;
+    }
+
+    public static Post map(PostUpdateForm form){
         var post = new Post();
         post.setTitle(form.getTitle());
         post.setContent(form.getContent());
