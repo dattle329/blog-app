@@ -11,8 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -24,6 +23,11 @@ public class PostServiceimpl implements PostService{
     public Page<PostDto> findAll(Pageable pageable) {
         return postRepository.findAll(pageable)
                 .map(PostMapper::map);
+    }
+
+    @Override
+    public Optional<Post> findById(Long id) {
+        return postRepository.findById(id);
     }
 
     @Override

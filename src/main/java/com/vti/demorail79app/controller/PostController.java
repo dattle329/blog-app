@@ -1,6 +1,7 @@
 package com.vti.demorail79app.controller;
 
 import com.vti.demorail79app.dto.PostDto;
+import com.vti.demorail79app.entity.Post;
 import com.vti.demorail79app.form.PostCreateForm;
 import com.vti.demorail79app.form.PostUpdateForm;
 import com.vti.demorail79app.service.PostService;
@@ -9,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -20,6 +21,12 @@ public class PostController {
     public Page<PostDto> findAll(Pageable pageable){
         return postService.findAll(pageable);
     }
+
+    @GetMapping("/api/v1/posts/{id}")
+    public Optional<Post> findById(@PathVariable("id") Long id){
+        return postService.findById(id);
+    }
+
     @PostMapping("/api/v1/posts")
     public PostDto create(@RequestBody PostCreateForm form){
         return postService.create(form);
