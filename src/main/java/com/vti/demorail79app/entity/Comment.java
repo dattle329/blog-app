@@ -4,29 +4,30 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "Post")
-public class Post {
+@Table(name = "Comment")
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title", unique = true, length = 100, nullable = false)
-    private String title;
+    @Column(name = "name", length = 50, nullable = false)
+    private String name;
 
-    @Column(name = "description", nullable = false, length = 100)
-    private String description;
+    @Column(name = "email", nullable = false, length = 75)
+    private String email;
 
-    @Column(name = "content", nullable = false, length = 150)
-    private String content;
+    @Column(name = "body", nullable = false, length = 100)
+    private String body;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
@@ -36,6 +37,10 @@ public class Post {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "post")
-    private List<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name = "post_id",
+                referencedColumnName = "id",
+                nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Post post;
 }
