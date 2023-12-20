@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface CommentService {
     Page<Commentdto> findAll(Pageable pageable);
+
+    Page<Commentdto> findByPostId(Long postId, Pageable pageable);
     Commentdto create(CommentCreateForm form, Long postId);
 
     Commentdto update(CommentUpdateForm form, Long id);
