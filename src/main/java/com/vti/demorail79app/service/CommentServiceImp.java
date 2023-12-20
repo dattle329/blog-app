@@ -1,7 +1,9 @@
 package com.vti.demorail79app.service;
 
 import com.vti.demorail79app.dto.Commentdto;
+import com.vti.demorail79app.entity.Comment;
 import com.vti.demorail79app.form.CommentCreateForm;
+import com.vti.demorail79app.form.CommentUpdateForm;
 import com.vti.demorail79app.mapper.CommentMapper;
 import com.vti.demorail79app.repository.CommentRepository;
 import com.vti.demorail79app.repository.PostRepository;
@@ -30,4 +32,18 @@ public class CommentServiceImp implements CommentService{
         var savedComment = commentRepository.save(comment);
         return CommentMapper.map(savedComment);
     }
+
+    @Override
+    public Commentdto update(CommentUpdateForm form, Long id) {
+        var comment = commentRepository.findById(id).get();
+        CommentMapper.map(form, comment);
+        var savedComment = commentRepository.save(comment);
+        return CommentMapper.map(savedComment);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        commentRepository.deleteById(id);
+    }
+
 }

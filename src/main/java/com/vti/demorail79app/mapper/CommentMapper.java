@@ -3,6 +3,7 @@ package com.vti.demorail79app.mapper;
 import com.vti.demorail79app.dto.Commentdto;
 import com.vti.demorail79app.entity.Comment;
 import com.vti.demorail79app.form.CommentCreateForm;
+import com.vti.demorail79app.form.CommentUpdateForm;
 
 public class CommentMapper {
     public static Comment map(CommentCreateForm form){
@@ -11,6 +12,12 @@ public class CommentMapper {
         comment.setBody(form.getBody());
         comment.setEmail(form.getEmail());
         return comment;
+    }
+
+    public static void map(CommentUpdateForm form, Comment comment){
+        comment.setName(form.getName());
+        comment.setBody(form.getBody());
+        comment.setEmail(form.getEmail());
     }
 
     public static Commentdto map(Comment comment){
