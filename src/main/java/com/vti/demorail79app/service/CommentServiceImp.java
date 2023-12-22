@@ -3,10 +3,12 @@ package com.vti.demorail79app.service;
 import com.vti.demorail79app.dto.Commentdto;
 import com.vti.demorail79app.entity.Comment;
 import com.vti.demorail79app.form.CommentCreateForm;
+import com.vti.demorail79app.form.CommentFilterForm;
 import com.vti.demorail79app.form.CommentUpdateForm;
 import com.vti.demorail79app.mapper.CommentMapper;
 import com.vti.demorail79app.repository.CommentRepository;
 import com.vti.demorail79app.repository.PostRepository;
+import com.vti.demorail79app.specification.CommentSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,8 +22,9 @@ public class CommentServiceImp implements CommentService{
     private final PostRepository postRepository;
 
     @Override
-    public Page<Commentdto> findAll(Pageable pageable) {
-        return commentRepository.findAll(pageable)
+    public Page<Commentdto> findAll(CommentFilterForm form, Pageable pageable) {
+        var spec = CommentSpecification.buildSpec(form);
+        return commentRepository.findAll(spec, pageable)
                 .map(CommentMapper::map);
     }
 

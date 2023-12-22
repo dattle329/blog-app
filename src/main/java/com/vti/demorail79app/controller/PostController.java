@@ -3,8 +3,10 @@ package com.vti.demorail79app.controller;
 import com.vti.demorail79app.dto.PostDto;
 import com.vti.demorail79app.entity.Post;
 import com.vti.demorail79app.form.PostCreateForm;
+import com.vti.demorail79app.form.PostFilterForm;
 import com.vti.demorail79app.form.PostUpdateForm;
 import com.vti.demorail79app.service.PostService;
+import com.vti.demorail79app.specification.PostSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,8 +20,8 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/api/v1/posts")
-    public Page<PostDto> findAll(Pageable pageable){
-        return postService.findAll(pageable);
+    public Page<PostDto> findAll(PostFilterForm form, Pageable pageable){
+        return postService.findAll(form, pageable);
     }
 
     @GetMapping("/api/v1/posts/{id}")

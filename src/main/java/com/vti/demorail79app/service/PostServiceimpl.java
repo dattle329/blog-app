@@ -3,9 +3,11 @@ package com.vti.demorail79app.service;
 import com.vti.demorail79app.dto.PostDto;
 import com.vti.demorail79app.entity.Post;
 import com.vti.demorail79app.form.PostCreateForm;
+import com.vti.demorail79app.form.PostFilterForm;
 import com.vti.demorail79app.form.PostUpdateForm;
 import com.vti.demorail79app.mapper.PostMapper;
 import com.vti.demorail79app.repository.PostRepository;
+import com.vti.demorail79app.specification.PostSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,8 +22,9 @@ public class PostServiceimpl implements PostService{
     private final PostRepository postRepository;
 
     @Override
-    public Page<PostDto> findAll(Pageable pageable) {
-        return postRepository.findAll(pageable)
+    public Page<PostDto> findAll(PostFilterForm form, Pageable pageable) {
+        var spec = PostSpecification.buildSpec(form);
+        return postRepository.findAll(spec, pageable)
                 .map(PostMapper::map);
     }
 
