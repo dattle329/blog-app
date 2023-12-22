@@ -6,14 +6,16 @@ import com.vti.demorail79app.form.PostCreateForm;
 import com.vti.demorail79app.form.PostFilterForm;
 import com.vti.demorail79app.form.PostUpdateForm;
 import com.vti.demorail79app.service.PostService;
-import com.vti.demorail79app.specification.PostSpecification;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@Validated
 @RestController
 @AllArgsConstructor
 public class PostController {
@@ -30,7 +32,7 @@ public class PostController {
     }
 
     @PostMapping("/api/v1/posts")
-    public PostDto create(@RequestBody PostCreateForm form){
+    public PostDto create(@RequestBody @Valid PostCreateForm form){
         return postService.create(form);
     }
     @PutMapping("/api/v1/posts/{id}")
