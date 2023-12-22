@@ -5,6 +5,8 @@ import com.vti.demorail79app.form.CommentCreateForm;
 import com.vti.demorail79app.form.CommentFilterForm;
 import com.vti.demorail79app.form.CommentUpdateForm;
 import com.vti.demorail79app.service.CommentService;
+import com.vti.demorail79app.validation.CommentIdExists;
+import com.vti.demorail79app.validation.PostIdExists;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,7 +26,7 @@ public class CommentController {
     }
 
     @GetMapping("/api/v1/posts/{postId}/comments")
-    public Page<Commentdto> findByPostId(@PathVariable("postId") Long postId, Pageable pageable){
+    public Page<Commentdto> findByPostId(@PathVariable("postId") @PostIdExists Long postId, Pageable pageable){
         return commentService.findByPostId(postId, pageable);
     }
 
@@ -34,12 +36,12 @@ public class CommentController {
     }
 
     @PutMapping("/api/v1/comments/{id}")
-    public Commentdto update(@RequestBody @Valid CommentUpdateForm form, @PathVariable("id") Long id){
+    public Commentdto update(@RequestBody @Valid CommentUpdateForm form, @PathVariable("id") @CommentIdExists Long id){
         return commentService.update(form, id);
     }
 
     @DeleteMapping("/api/v1/comments/{id}")
-    public void deleteById(@PathVariable("id") Long id){
+    public void deleteById(@PathVariable("id") @CommentIdExists Long id){
         commentService.deleteById(id);
     }
 
