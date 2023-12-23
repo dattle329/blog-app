@@ -28,6 +28,6 @@ public class CommentMapper {
         dto.setEmail(comment.getEmail());
         dto.setCreatedAt(comment.getCreatedAt());
         dto.setUpdatedAt(comment.getUpdatedAt());
-        return dto;
+        return dto.withSelfRel();
     }
 }

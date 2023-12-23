@@ -35,6 +35,12 @@ public class CommentServiceImp implements CommentService{
     }
 
     @Override
+    public Commentdto findById(Long id) {
+        var comment = commentRepository.findById(id).get();
+        return CommentMapper.map(comment);
+    }
+
+    @Override
     public Commentdto create(CommentCreateForm form, Long postId) {
         var comment = CommentMapper.map(form);
         var post = postRepository.findById(postId).get();
