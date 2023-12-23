@@ -29,8 +29,9 @@ public class PostServiceimpl implements PostService{
     }
 
     @Override
-    public Optional<Post> findById(Long id) {
-        return postRepository.findById(id);
+    public PostDto findById(Long id) {
+        var post = postRepository.findById(id).get();
+        return PostMapper.map(post);
     }
 
     @Override

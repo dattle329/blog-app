@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface PostService {
     Page<PostDto> findAll(PostFilterForm form, Pageable pageable);
 
-    Optional<Post> findById(Long id);
+    PostDto findById(Long id);
 
     PostDto create(PostCreateForm form);
 

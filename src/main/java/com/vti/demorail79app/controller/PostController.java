@@ -28,7 +28,7 @@ public class PostController {
     }
 
     @GetMapping("/api/v1/posts/{id}")
-    public Optional<Post> findById(@PathVariable("id") @PostIdExists Long id){
+    public PostDto findById(@PathVariable("id") @PostIdExists Long id){
         return postService.findById(id);
     }
 
